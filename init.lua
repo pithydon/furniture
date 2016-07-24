@@ -97,20 +97,25 @@ function furniture.register_wooden(name, def)
 		groups = def.groups
 	})
 
+	local fence_group = table.copy(def.groups)
+	fence_group.fence = 1
+
 	minetest.register_node(":furniture:table_"..subname, {
 		description = def.description_table,
 		tiles = def.tiles_table,
 		paramtype = "light",
 		drawtype = "nodebox",
 		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.125, -0.5, -0.125, 0.125, 0.375, 0.125},
-				{-0.5, 0.375, -0.5, 0.5, 0.5, 0.5}
-			},
+			type = "connected",
+			fixed = {{-0.125, -0.5, -0.125, 0.125, 0.375, 0.125}, {-0.5, 0.375, -0.5, 0.5, 0.5, 0.5}},
+			connect_front = {{-0.0625, 0.1875, -0.5, 0.0625, 0.3125, -0.125}, {-0.0625, -0.3125, -0.5, 0.0625, -0.1875, -0.125}},
+			connect_left = {{-0.5, 0.1875, -0.0625, -0.125, 0.3125, 0.0625}, {-0.5, -0.3125, -0.0625, -0.125, -0.1875, 0.0625}},
+			connect_back = {{-0.0625, 0.1875, 0.125, 0.0625, 0.3125, 0.5}, {-0.0625, -0.3125, 0.125, 0.0625, -0.1875, 0.5}},
+			connect_right = {{0.125, 0.1875, -0.0625, 0.5, 0.3125, 0.0625}, {0.125, -0.3125, -0.0625, 0.5, -0.1875, 0.0625}}
 		},
+		connects_to = {"group:fence"},
 		sounds = def.sounds,
-		groups = def.groups
+		groups = fence_group
 	})
 
 	minetest.register_craft({
