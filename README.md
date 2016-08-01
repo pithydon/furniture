@@ -51,6 +51,7 @@ mod api:
 
 ```lua
 furniture.register_wooden("recipe:node", {item definition})
+furniture.register_stone("recipe:node", {item definition})
 ```
 
 examples
@@ -58,12 +59,12 @@ examples
 ```lua
 furniture.register_wooden("default:wood", {
 	description = "Wooden",
-	description_chair = "Wooden Chair",
+	description_chair = "Wooden Chair", -- not used in furniture.register_stone
 	description_stool = "Wooden Stool",
 	description_table = "Wooden Table",
 	tiles = {"default_wood.png"},
-	tiles_chair = {"default_wood.png"},
-	tiles_table = {"default_wood.png"},
+	tiles_chair = {"default_wood.png"}, -- not used in furniture.register_stone
+	tiles_table = {"default_wood.png"}, -- not used in furniture.register_stone
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	sounds = default.node_sound_wood_defaults()
 })
