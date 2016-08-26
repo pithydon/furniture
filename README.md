@@ -88,4 +88,10 @@ Any part of the item definition can also be blank.
 furniture.register_wooden("default:wood", {})
 ```
 
+To use the sit function separately use...
+
+```lua
+furniture.register_seat("mymods:chair")
+```
+
 [pithydon]: <https://github.com/pithydon>

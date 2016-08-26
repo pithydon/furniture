@@ -1,5 +1,27 @@
 furniture = {chairs = {}}
 
+function furniture.register_seat(node_name)
+	minetest.register_abm({
+		nodenames = {node_name},
+		interval = 1,
+		chance = 1,
+		action = function(pos, node)
+			local objs = minetest.get_objects_inside_radius(pos, 0.7)
+			for k,v in pairs(objs) do
+				local keys = v:get_player_control()
+				if keys.sneak == true and default.player_attached[name] ~= true then
+					local name = v:get_player_name()
+					v:setpos(pos)
+					local pos = minetest.pos_to_string(pos)
+					table.insert(furniture.chairs, name.."_:_"..pos)
+					default.player_attached[name] = true
+					default.player_set_animation(v, "sit" , 0)
+				end
+			end
+		end
+	})
+end
+
 function furniture.register_wooden(name, def)
 	local node_def = minetest.registered_nodes[name]
 	if not node_def then
