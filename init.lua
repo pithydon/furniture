@@ -8,7 +8,7 @@ function furniture.stand(player, pos)
 		default.player_attached[name] = false
 		default.player_set_animation(player, "stand" , 30)
 	else
-		minetest.after(0.1, furniture.stand, player, pos)
+		minetest.after(0.5, furniture.stand, player, pos)
 	end
 end
 
@@ -26,7 +26,7 @@ function furniture.register_seat(node_name)
 					v:setpos(pos)
 					default.player_attached[name] = true
 					default.player_set_animation(v, "sit" , 0)
-					minetest.after(0.1, furniture.stand, v, pos)
+					minetest.after(0.5, furniture.stand, v, pos)
 				end
 			end
 		end
@@ -198,7 +198,7 @@ function furniture.register_wooden(name, def)
 					v:setpos(pos)
 					default.player_attached[name] = true
 					default.player_set_animation(v, "sit" , 0)
-					minetest.after(0.1, furniture.stand, v, pos)
+					minetest.after(0.5, furniture.stand, v, pos)
 				end
 			end
 		end
@@ -299,7 +299,7 @@ function furniture.register_stone(name, def)
 					v:setpos(pos)
 					default.player_attached[name] = true
 					default.player_set_animation(v, "sit" , 0)
-					minetest.after(0.1, furniture.stand, v, pos)
+					minetest.after(0.5, furniture.stand, v, pos)
 				end
 			end
 		end
