@@ -1,4 +1,16 @@
-furniture = {chairs = {}}
+furniture = {}
+
+function furniture.stand(player, pos)
+	local player_pos = player:getpos()
+	local dist = vector.distance(player_pos, pos)
+	if dist > 0.7 then
+		local name = player:get_player_name()
+		default.player_attached[name] = false
+		default.player_set_animation(player, "stand" , 30)
+	else
+		minetest.after(0.1, furniture.stand, player, pos)
+	end
+end
 
 function furniture.register_seat(node_name)
 	minetest.register_abm({
@@ -12,10 +24,9 @@ function furniture.register_seat(node_name)
 				if keys.sneak == true and default.player_attached[name] ~= true then
 					local name = v:get_player_name()
 					v:setpos(pos)
-					local pos = minetest.pos_to_string(pos)
-					table.insert(furniture.chairs, name.."_:_"..pos)
 					default.player_attached[name] = true
 					default.player_set_animation(v, "sit" , 0)
+					minetest.after(0.1, furniture.stand, v, pos)
 				end
 			end
 		end
@@ -185,10 +196,9 @@ function furniture.register_wooden(name, def)
 				if keys.sneak == true and default.player_attached[name] ~= true then
 					local name = v:get_player_name()
 					v:setpos(pos)
-					local pos = minetest.pos_to_string(pos)
-					table.insert(furniture.chairs, name.."_:_"..pos)
 					default.player_attached[name] = true
 					default.player_set_animation(v, "sit" , 0)
+					minetest.after(0.1, furniture.stand, v, pos)
 				end
 			end
 		end
@@ -287,31 +297,14 @@ function furniture.register_stone(name, def)
 				if keys.sneak == true and default.player_attached[name] ~= true then
 					local name = v:get_player_name()
 					v:setpos(pos)
-					local pos = minetest.pos_to_string(pos)
-					table.insert(furniture.chairs, name.."_:_"..pos)
 					default.player_attached[name] = true
 					default.player_set_animation(v, "sit" , 0)
+					minetest.after(0.1, furniture.stand, v, pos)
 				end
 			end
 		end
 	})
 end
-
-minetest.register_globalstep(function(dtime)
-	for i,v in ipairs(furniture.chairs) do
-		local name = v:split("_:_")[1]
-		local player = minetest.get_player_by_name(name)
-		local player_pos = player:getpos()
-		local pos = v:split("_:_")[2]
-		local pos = minetest.string_to_pos(pos)
-		local dist = vector.distance(player_pos, pos)
-		if dist > 0.7 then
-			default.player_attached[name] = false
-			default.player_set_animation(player, "stand" , 30)
-			table.remove(furniture.chairs, i)
-		end
-	end
-end)
 
 furniture.register_wooden("default:wood", {description = "Wooden"})
 furniture.register_wooden("default:junglewood", {description="Junglewood"})
