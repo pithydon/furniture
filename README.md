@@ -1,35 +1,12 @@
-furniture by [pithydon]
+furniture by pithydon (2016)
 
-code license:
+Chairs, stools, and tables.
 
-```txt
-This is free and unencumbered software released into the public domain.
+Forum: https://forum.minetest.net/viewtopic.php?f=11&t=14910
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
+Github: https://github.com/pithydon/furniture
 
-In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
-```
-
-For more information, please refer to <http://unlicense.org>
-
-texture license:
+License for all of this mod is "CC0", see below.
 
 ```txt
 CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS INFORMATION ON AN "AS-IS" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER.
@@ -64,6 +41,7 @@ mod api:
 ```lua
 furniture.register_wooden("recipe:node", {item definition})
 furniture.register_stone("recipe:node", {item definition})
+furniture.register_wool("recipe:node", {item definition})
 ```
 
 examples
@@ -71,18 +49,20 @@ examples
 ```lua
 furniture.register_wooden("default:wood", {
 	description = "Wooden",
-	description_chair = "Wooden Chair", -- not used in furniture.register_stone
+	description_chair = "Wooden Chair", -- Not used in "furniture.register_stone".
 	description_stool = "Wooden Stool",
-	description_table = "Wooden Table",
+	description_table = "Wooden Table", -- Not used in "furniture.register_wool".
 	tiles = {"default_wood.png"},
-	tiles_chair = {"default_wood.png"}, -- not used in furniture.register_stone
-	tiles_table = {"default_wood.png"}, -- not used in furniture.register_stone
+	tiles_chair = {"default_wood.png"}, -- Only used in "furniture.register_wooden".
+	tiles_table = {"default_wood.png"}, -- Only used in "furniture.register_wooden".
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	stick = "group:stick" -- Used for crafting. Not used in "furniture.register_stone".
 })
 ```
 
 Any part of the item definition can also be blank.
+Blank parts will automatically be filled in.
 
 ```lua
 furniture.register_wooden("default:wood", {})
@@ -93,5 +73,3 @@ To use the sit function separately use...
 ```lua
 furniture.register_seat("mymods:chair")
 ```
-
-[pithydon]: <https://github.com/pithydon>
