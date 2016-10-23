@@ -57,7 +57,8 @@ furniture.register_wooden("default:wood", {
 	tiles_table = {"default_wood.png"}, -- Only used in "furniture.register_wooden".
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	sounds = default.node_sound_wood_defaults(),
-	stick = "group:stick" -- Used for crafting. Not used in "furniture.register_stone".
+	stick = "group:stick", -- Used for crafting. Not used in "furniture.register_stone".
+	handle_crafts = true -- Should craft recipes be automatically made. nil = true
 })
 ```
 

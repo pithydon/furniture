@@ -155,40 +155,42 @@ function furniture.register_wooden(name, def)
 		groups = fence_group
 	})
 
-	minetest.register_craft({
-		output = "furniture:chair_"..subname,
-		recipe = {
-			{def.stick, ""},
-			{name, name},
-			{def.stick, def.stick}
-		}
-	})
+	if def.handle_crafts ~= false then
+		minetest.register_craft({
+			output = "furniture:chair_"..subname,
+			recipe = {
+				{def.stick, ""},
+				{name, name},
+				{def.stick, def.stick}
+			}
+		})
 
-	minetest.register_craft({
-		output = "furniture:chair_"..subname,
-		recipe = {
-			{"", def.stick},
-			{name, name},
-			{def.stick, def.stick}
-		}
-	})
+		minetest.register_craft({
+			output = "furniture:chair_"..subname,
+			recipe = {
+				{"", def.stick},
+				{name, name},
+				{def.stick, def.stick}
+			}
+		})
 
-	minetest.register_craft({
-		output = "furniture:stool_"..subname,
-		recipe = {
-			{name, name},
-			{def.stick, def.stick}
-		}
-	})
+		minetest.register_craft({
+			output = "furniture:stool_"..subname,
+			recipe = {
+				{name, name},
+				{def.stick, def.stick}
+			}
+		})
 
-	minetest.register_craft({
-		output = "furniture:table_"..subname,
-		recipe = {
-			{name, name, name},
-			{"", name, ""},
-			{"", name, ""}
-		}
-	})
+		minetest.register_craft({
+			output = "furniture:table_"..subname,
+			recipe = {
+				{name, name, name},
+				{"", name, ""},
+				{"", name, ""}
+			}
+		})
+	end
 
 	minetest.register_abm({
 		nodenames = {"furniture:chair_"..subname, "furniture:stool_"..subname},
@@ -274,22 +276,24 @@ function furniture.register_stone(name, def)
 		groups = wall_group
 	})
 
-	minetest.register_craft({
-		output = "furniture:stool_"..subname,
-		recipe = {
-			{name, name},
-			{name, name}
-		}
-	})
+	if def.handle_crafts ~= false then
+		minetest.register_craft({
+			output = "furniture:stool_"..subname,
+			recipe = {
+				{name, name},
+				{name, name}
+			}
+		})
 
-	minetest.register_craft({
-		output = "furniture:table_"..subname,
-		recipe = {
-			{name, name, name},
-			{"", name, ""},
-			{"", name, ""}
-		}
-	})
+		minetest.register_craft({
+			output = "furniture:table_"..subname,
+			recipe = {
+				{name, name, name},
+				{"", name, ""},
+				{"", name, ""}
+			}
+		})
+	end
 
 	minetest.register_abm({
 		nodenames = {"furniture:stool_"..subname},
@@ -642,22 +646,24 @@ function furniture.register_wool(name, def)
 		groups = def.groups
 	})
 
-	minetest.register_craft({
-		output = "furniture:chair_"..subname,
-		recipe = {
-			{name, "", name},
-			{name, name, name},
-			{def.stick, def.stick, def.stick}
-		}
-	})
+	if def.handle_crafts ~= false then
+		minetest.register_craft({
+			output = "furniture:chair_"..subname,
+			recipe = {
+				{name, "", name},
+				{name, name, name},
+				{def.stick, def.stick, def.stick}
+			}
+		})
 
-	minetest.register_craft({
-		output = "furniture:stool_"..subname,
-		recipe = {
-			{name, name},
-			{def.stick, def.stick}
-		}
-	})
+		minetest.register_craft({
+			output = "furniture:stool_"..subname,
+			recipe = {
+				{name, name},
+				{def.stick, def.stick}
+			}
+		})
+	end
 
 	minetest.register_abm({
 		nodenames = {"furniture:chair_"..subname, "furniture:chair_middle_"..subname, "furniture:chair_right_"..subname,
