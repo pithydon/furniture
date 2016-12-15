@@ -1,10 +1,6 @@
-furniture by pithydon (2016)
+furniture v1.0
 
 Chairs, stools, and tables.
-
-Forum: https://forum.minetest.net/viewtopic.php?f=11&t=14910
-
-Github: https://github.com/pithydon/furniture
 
 License for all of this mod is "CC0", see below.
 
@@ -51,6 +47,7 @@ furniture.register_wooden("default:wood", {
 	description = "Wooden",
 	description_chair = "Wooden Chair", -- Not used in "furniture.register_stone".
 	description_stool = "Wooden Stool",
+	description_bench = "Wooden Bench", -- Only used in "furniture.register_wooden".
 	description_table = "Wooden Table", -- Not used in "furniture.register_wool".
 	tiles = {"default_wood.png"},
 	tiles_chair = {"default_wood.png"}, -- Only used in "furniture.register_wooden".
