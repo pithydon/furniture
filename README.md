@@ -1,4 +1,4 @@
-furniture v1.0
+furniture v1.1
 
 Chairs, stools, and tables.
 

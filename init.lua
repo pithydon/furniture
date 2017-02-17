@@ -1002,11 +1002,26 @@ function furniture.register_wool(name, def)
 	})
 end
 
-furniture.register_wooden("default:wood", {description = "Wooden"})
-furniture.register_wooden("default:junglewood", {description="Junglewood"})
-furniture.register_wooden("default:pine_wood", {description="Pine Wood"})
-furniture.register_wooden("default:acacia_wood", {description="Acacia Wood"})
-furniture.register_wooden("default:aspen_wood", {description="Aspen Wood"})
+furniture.register_wooden("default:wood", {
+	description = "Wooden",
+	tiles_table = {"default_wood.png", "default_wood.png", "default_wood.png^[lowpart:87:default_fence_wood.png"}
+})
+furniture.register_wooden("default:junglewood", {
+	description="Junglewood",
+	tiles_table = {"default_junglewood.png", "default_junglewood.png", "default_junglewood.png^[lowpart:87:default_fence_junglewood.png"}
+})
+furniture.register_wooden("default:pine_wood", {
+	description = "Pine Wood",
+	tiles_table = {"default_pine_wood.png", "default_pine_wood.png", "default_pine_wood.png^[lowpart:87:default_fence_pine_wood.png"}
+})
+furniture.register_wooden("default:acacia_wood", {
+	description = "Acacia Wood",
+	tiles_table = {"default_acacia_wood.png", "default_acacia_wood.png", "default_acacia_wood.png^[lowpart:87:default_fence_acacia_wood.png"}
+})
+furniture.register_wooden("default:aspen_wood", {
+	description = "Aspen Wood",
+	tiles_table = {"default_aspen_wood.png", "default_aspen_wood.png", "default_aspen_wood.png^[lowpart:87:default_fence_aspen_wood.png"}
+})
 
 furniture.register_stone("default:cobble", {})
 furniture.register_stone("default:mossycobble", {})
