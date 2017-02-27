@@ -1,14 +1,29 @@
 furniture = {}
 
 function furniture.stand(player, pos)
-	local player_pos = player:getpos()
-	local dist = vector.distance(player_pos, pos)
+	local dist = vector.distance(player:getpos(), pos)
 	if dist > 0.7 then
 		local name = player:get_player_name()
 		default.player_attached[name] = false
+		player:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
 		default.player_set_animation(player, "stand" , 30)
 	else
-		minetest.after(0.5, furniture.stand, player, pos)
+		minetest.after(0.3, furniture.stand, player, pos)
+	end
+end
+
+local sit = function(pos, node)
+	local objs = minetest.get_objects_inside_radius(pos, 0.7)
+	for k,v in pairs(objs) do
+		local keys = v:get_player_control()
+		local name = v:get_player_name()
+		if keys.sneak == true and default.player_attached[name] ~= true then
+			v:setpos(pos)
+			default.player_attached[name] = true
+			v:set_eye_offset({x = 0, y = -6, z = 0}, {x = 0, y = 0, z = 0})
+			default.player_set_animation(v, "sit" , 0)
+			minetest.after(0.3, furniture.stand, v, pos)
+		end
 	end
 end
 
@@ -18,17 +33,7 @@ function furniture.register_seat(node_name)
 		interval = 1,
 		chance = 1,
 		action = function(pos, node)
-			local objs = minetest.get_objects_inside_radius(pos, 0.7)
-			for k,v in pairs(objs) do
-				local keys = v:get_player_control()
-				if keys.sneak == true and default.player_attached[name] ~= true then
-					local name = v:get_player_name()
-					v:setpos(pos)
-					default.player_attached[name] = true
-					default.player_set_animation(v, "sit" , 0)
-					minetest.after(0.5, furniture.stand, v, pos)
-				end
-			end
+			sit(pos, node)
 		end
 	})
 end
@@ -513,17 +518,7 @@ function furniture.register_wooden(name, def)
 		interval = 1,
 		chance = 1,
 		action = function(pos, node)
-			local objs = minetest.get_objects_inside_radius(pos, 0.7)
-			for k,v in pairs(objs) do
-				local keys = v:get_player_control()
-				if keys.sneak == true and default.player_attached[name] ~= true then
-					local name = v:get_player_name()
-					v:setpos(pos)
-					default.player_attached[name] = true
-					default.player_set_animation(v, "sit" , 0)
-					minetest.after(0.5, furniture.stand, v, pos)
-				end
-			end
+			sit(pos, node)
 		end
 	})
 end
@@ -616,17 +611,7 @@ function furniture.register_stone(name, def)
 		interval = 1,
 		chance = 1,
 		action = function(pos, node)
-			local objs = minetest.get_objects_inside_radius(pos, 0.7)
-			for k,v in pairs(objs) do
-				local keys = v:get_player_control()
-				if keys.sneak == true and default.player_attached[name] ~= true then
-					local name = v:get_player_name()
-					v:setpos(pos)
-					default.player_attached[name] = true
-					default.player_set_animation(v, "sit" , 0)
-					minetest.after(0.5, furniture.stand, v, pos)
-				end
-			end
+			sit(pos, node)
 		end
 	})
 end
@@ -987,17 +972,7 @@ function furniture.register_wool(name, def)
 		interval = 1,
 		chance = 1,
 		action = function(pos, node)
-			local objs = minetest.get_objects_inside_radius(pos, 0.7)
-			for k,v in pairs(objs) do
-				local keys = v:get_player_control()
-				if keys.sneak == true and default.player_attached[name] ~= true then
-					local name = v:get_player_name()
-					v:setpos(pos)
-					default.player_attached[name] = true
-					default.player_set_animation(v, "sit" , 0)
-					minetest.after(0.5, furniture.stand, v, pos)
-				end
-			end
+			sit(pos, node)
 		end
 	})
 end
@@ -1007,7 +982,7 @@ furniture.register_wooden("default:wood", {
 	tiles_table = {"default_wood.png", "default_wood.png", "default_wood.png^[lowpart:87:default_fence_wood.png"}
 })
 furniture.register_wooden("default:junglewood", {
-	description="Junglewood",
+	description = "Junglewood",
 	tiles_table = {"default_junglewood.png", "default_junglewood.png", "default_junglewood.png^[lowpart:87:default_fence_junglewood.png"}
 })
 furniture.register_wooden("default:pine_wood", {
