@@ -3,6 +3,9 @@ furniture = {}
 function furniture.stand(player, pos)
 	local dist = vector.distance(player:getpos(), pos)
 	if dist > 0.7 then
+		player:set_physics_override({
+			sneak = true
+		})
 		local name = player:get_player_name()
 		default.player_attached[name] = false
 		player:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
@@ -12,16 +15,23 @@ function furniture.stand(player, pos)
 	end
 end
 
+local tp_seat = function(player, pos)
+	player:setpos(pos)
+end
+
 local sit = function(pos, node)
 	local objs = minetest.get_objects_inside_radius(pos, 0.7)
 	for k,v in pairs(objs) do
 		local keys = v:get_player_control()
 		local name = v:get_player_name()
 		if keys.sneak == true and default.player_attached[name] ~= true then
-			v:setpos(pos)
+			v:set_physics_override({
+				sneak = false
+			})
 			default.player_attached[name] = true
 			v:set_eye_offset({x = 0, y = -6, z = 0}, {x = 0, y = 0, z = 0})
 			default.player_set_animation(v, "sit" , 0)
+			minetest.after(0.3, tp_seat, v, pos)
 			minetest.after(0.3, furniture.stand, v, pos)
 		end
 	end
