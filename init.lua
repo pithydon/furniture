@@ -549,7 +549,7 @@ function furniture.register_stone(name, def)
 		def.description_stool = def.description.." Stool"
 	end
 	if not def.description_table then
-		def.description_table = def.description.." Table"
+		def.description_table = def.description.." Pedestal"
 	end
 	if not def.tiles then
 		def.tiles = node_def.tiles
@@ -586,11 +586,13 @@ function furniture.register_stone(name, def)
 		drawtype = "nodebox",
 		node_box = {
 			type = "connected",
-			fixed = {{-0.25, -0.5, -0.25, 0.25, 0.3125, 0.25}, {-0.5, 0.3125, -0.5, 0.5, 0.5, 0.5}},
-			connect_front = {-0.1875, -0.5, -0.5, 0.1875, 0.3125, -0.25},
-			connect_left = {-0.5, -0.5, -0.1875, -0.25, 0.3125, 0.1875},
-			connect_back = {-0.1875, -0.5, 0.25, 0.1875, 0.3125, 0.5},
-			connect_right = {0.25, -0.5, -0.1875, 0.5, 0.3125, 0.1875}
+			fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
+			connect_front = {-0.1875, -0.5, -0.5, 0.1875, 0.5, -0.25},
+			connect_left = {-0.5, -0.5, -0.1875, -0.25, 0.5, 0.1875},
+			connect_back = {-0.1875, -0.5, 0.25, 0.1875, 0.5, 0.5},
+			connect_right = {0.25, -0.5, -0.1875, 0.5, 0.5, 0.1875},
+			disconnected_top = {-0.5, 0.25, -0.5, 0.5, 0.5, 0.5},
+			disconnected_bottom = {-0.5, -0.5, -0.5, 0.5, -0.25, 0.5}
 		},
 		connects_to = {"group:wall"},
 		sounds = def.sounds,
