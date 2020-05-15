@@ -32,15 +32,71 @@ For these and/or other purposes and motivations, and without any expectation of 
 	d.	Affirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.
 ```
 
-mod api:
+Mod api:
+
+```lua
+furniture.register_chair("recipe:node", {item definition})
+furniture.register_stool("recipe:node", {item definition})
+furniture.register_bench("recipe:node", {item definition})
+furniture.register_table("recipe:node", {item definition})
+furniture.register_stump("recipe:node", {item definition})
+furniture.register_pedestal("recipe:node", {item definition})
+furniture.register_couch("recipe:node", {item definition})
+```
+
+```lua
+item_definition = {
+	prefix = "furniture:", -- Default is the name of your mod, not "furniture:". Can have more after the mod name.
+													-- Do not use ":" at beginning. Can be mods other than your own.
+	description = "Wooden", -- Default copied from "recipe:node" with added furniture type at end.
+	tiles = {"default_wood.png"}, -- Default copied from "recipe:node". Some furniture types have modified defaults.
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3}, -- Default copied from "recipe:node" with tweaks.
+	connects_to = {"group:fence"} -- Only used for tables and pedestals. Default for table = {"group:fence"}. Default for pedestal = {"group:wall"}.
+	sounds = default.node_sound_wood_defaults(), -- Default copied from "recipe:node".
+	stick = "group:stick", -- Used for crafting. Default "group:stick". Default for stumps is "recipe:node". Not used for tables and pedestals.
+	handle_crafts = true -- Should craft recipes be automatically made. nil = true
+}
+```
+
+To use the sit function separately use...
+
+```lua
+furniture.register_seat("mymods:chair")
+```
+
+Legacy api:
+
+Registers nodes in active mod with new api, configurable with prefix. After updating use...
+
+```lua
+minetest.register_alias("furniture:chair_wood", prefix.."chair_wood")
+```
+
+Stone and wool stools were changed to stumps.
+
+```lua
+minetest.register_alias("furniture:stool_cobble", prefix.."stump_cobble")
+```
+
+Stone tables were changed to pedestals.
+
+```lua
+minetest.register_alias("furniture:table_cobble", prefix.."pedestal_cobble")
+```
+
+Wool chairs were changed to couches.
+
+```lua
+minetest.register_alias("furniture:chair_wool", prefix.."couch_wool")
+```
+
+Old reference api:
 
 ```lua
 furniture.register_wooden("recipe:node", {item definition})
 furniture.register_stone("recipe:node", {item definition})
 furniture.register_wool("recipe:node", {item definition})
 ```
-
-examples
 
 ```lua
 furniture.register_wooden("default:wood", {
@@ -57,17 +113,4 @@ furniture.register_wooden("default:wood", {
 	stick = "group:stick", -- Used for crafting. Not used in "furniture.register_stone".
 	handle_crafts = true -- Should craft recipes be automatically made. nil = true
 })
-```
-
-Any part of the item definition can also be blank.
-Blank parts will automatically be filled in.
-
-```lua
-furniture.register_wooden("default:wood", {})
-```
-
-To use the sit function separately use...
-
-```lua
-furniture.register_seat("mymods:chair")
 ```
