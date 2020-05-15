@@ -47,7 +47,7 @@ furniture.register_couch("recipe:node", {item definition})
 ```lua
 item_definition = {
 	prefix = "furniture:", -- Default is the name of your mod, not "furniture:". Can have more after the mod name.
-													-- Do not use ":" at beginning. Can be mods other than your own.
+			-- Do not use ":" at beginning. Can be mods other than your own.
 	description = "Wooden", -- Default copied from "recipe:node" with added furniture type at end.
 	tiles = {"default_wood.png"}, -- Default copied from "recipe:node". Some furniture types have modified defaults.
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3}, -- Default copied from "recipe:node" with tweaks.
