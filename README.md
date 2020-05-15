@@ -70,24 +70,41 @@ Registers nodes in active mod with new api, configurable with prefix. After upda
 
 ```lua
 minetest.register_alias("furniture:chair_wood", prefix.."chair_wood")
+-- Benches have 4 nodes.
+minetest.register_alias("furniture:bench_wood", prefix.."bench_wood")
+minetest.register_alias("furniture:bench_middle_wood", prefix.."bench_middle_wood")
+minetest.register_alias("furniture:bench_left_wood", prefix.."bench_left_wood")
+minetest.register_alias("furniture:bench_right_wood", prefix.."bench_right_wood")
 ```
 
 Stone and wool stools were changed to stumps.
 
 ```lua
 minetest.register_alias("furniture:stool_cobble", prefix.."stump_cobble")
+-- Need a second one for the prefix change.
+minetest.register_alias("furniture:stump_cobble", prefix.."stump_cobble")
 ```
 
 Stone tables were changed to pedestals.
 
 ```lua
 minetest.register_alias("furniture:table_cobble", prefix.."pedestal_cobble")
+
+minetest.register_alias("furniture:pedestal_cobble", prefix.."pedestal_cobble")
 ```
 
 Wool chairs were changed to couches.
 
 ```lua
 minetest.register_alias("furniture:chair_wool", prefix.."couch_wool")
+minetest.register_alias("furniture:chair_middle_wool", prefix.."couch_middle_wool")
+minetest.register_alias("furniture:chair_left_wool", prefix.."couch_left_wool")
+minetest.register_alias("furniture:chair_right_wool", prefix.."couch_right_wool")
+
+minetest.register_alias("furniture:couch_wool", prefix.."couch_wool")
+minetest.register_alias("furniture:couch_middle_wool", prefix.."couch_middle_wool")
+minetest.register_alias("furniture:couch_left_wool", prefix.."couch_left_wool")
+minetest.register_alias("furniture:couch_right_wool", prefix.."couch_right_wool")
 ```
 
 Old reference api:
