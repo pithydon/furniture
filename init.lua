@@ -1372,3 +1372,18 @@ if minetest.get_modpath("dye") and minetest.get_modpath("wool") then
 		minetest.register_alias("furniture:stool_"..v[1], "furniture:wool_stump_"..v[1]) --legacy alias
 	end
 end
+
+if minetest.get_modpath("xdecor") then
+	minetest.override_item("xdecor:chair", {
+		on_rightclick = function()
+			return nil
+		end
+	})
+	minetest.override_item("xdecor:cushion", {
+		on_rightclick = function()
+			return nil
+		end
+	})
+	furniture.register_seat("xdecor:chair")
+	furniture.register_seat("xdecor:cushion")
+end
